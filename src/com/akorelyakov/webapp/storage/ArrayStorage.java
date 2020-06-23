@@ -7,18 +7,23 @@ import java.util.Arrays;
 /**
  * Array based storage for Resumes
  */
-public class ArrayStorage {
-    private Resume[] storage = new Resume[10_000];
+public class ArrayStorage implements Storage{
+    private static final int STORAGE_LIMIT = 10_000;
+
+    private Resume[] storage = new Resume[STORAGE_LIMIT];
     private int size = 0;
 
     public void clear() {
-        Arrays.fill(storage, null);
+        Arrays.fill(storage, 0, size, null);
         size = 0;
     }
 
     public void save(Resume resume) {
         int searchKey = getSearchKey(resume.getUuid());
-        if (searchKey <= 0) {
+        if (size == STORAGE_LIMIT) {
+            System.out.println("Storage overflow");
+        }
+        else if (searchKey <= 0) {
             storage[size] = resume;
             size++;
         } else {
@@ -30,7 +35,6 @@ public class ArrayStorage {
         int searchKey = getSearchKey(resume.getUuid());
         if (searchKey >= 0) {
             storage[searchKey] = resume;
-            size++;
         } else {
             System.out.println("resume is not exist");
         }
@@ -65,12 +69,11 @@ public class ArrayStorage {
     }
 
     private int getSearchKey(String uuid) {
-        int searchKey = -1;
         for (int i = 0; i < size; i++) {
             if (uuid.equals(storage[i].getUuid())) {
-                searchKey = i;
+                return i;
             }
         }
-        return searchKey;
+        return -1;
     }
 }
