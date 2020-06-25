@@ -3,7 +3,7 @@ package com.akorelyakov.webapp.model;
 /**
  * Initial resume class
  */
-public class Resume {
+public class Resume implements Comparable<Resume> {
     private String uuid;
 
     private String fullName;
@@ -15,6 +15,9 @@ public class Resume {
     public Resume(String uuid, String fullName) {
         this.uuid = uuid;
         this.fullName = fullName;
+    }
+
+    public Resume() {
     }
 
     public String getUuid() {
@@ -46,5 +49,14 @@ public class Resume {
         int result = uuid.hashCode();
         result = 31 * result + fullName.hashCode();
         return result;
+    }
+
+    @Override
+    public int compareTo(Resume o) {
+        return uuid.compareTo(o.uuid);
+    }
+
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
     }
 }

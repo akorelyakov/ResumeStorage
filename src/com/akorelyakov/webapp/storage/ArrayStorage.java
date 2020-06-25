@@ -7,68 +7,20 @@ import java.util.Arrays;
 /**
  * Array based storage for Resumes
  */
-public class ArrayStorage implements Storage{
-    private static final int STORAGE_LIMIT = 10_000;
+public class ArrayStorage extends AbstractArrayStorage {
 
-    private Resume[] storage = new Resume[STORAGE_LIMIT];
-    private int size = 0;
-
-    public void clear() {
-        Arrays.fill(storage, 0, size, null);
-        size = 0;
+    @Override
+    protected void fillDeletedElement(int index) {
+        storage[index] = storage[size - 1];
     }
 
-    public void save(Resume resume) {
-        int searchKey = getSearchKey(resume.getUuid());
-        if (size == STORAGE_LIMIT) {
-            System.out.println("Storage overflow");
-        }
-        else if (searchKey <= 0) {
-            storage[size] = resume;
-            size++;
-        } else {
-            System.out.println("resume is already exist");
-        }
+    @Override
+    protected void insertElement(Resume r, int index) {
+        storage[size] = r;
     }
 
-    public void update(Resume resume) {
-        int searchKey = getSearchKey(resume.getUuid());
-        if (searchKey >= 0) {
-            storage[searchKey] = resume;
-        } else {
-            System.out.println("resume is not exist");
-        }
-    }
-
-    public Resume get(String uuid) {
-        int searchKey = getSearchKey(uuid);
-        if (searchKey >= 0) {
-            return storage[searchKey];
-        } else {
-            System.out.println("resume is not exist");
-        }
-        return null;
-    }
-
-    public void delete(String uuid) {
-        int searchKey = getSearchKey(uuid);
-        if (searchKey >= 0) {
-            System.arraycopy(storage, searchKey + 1, storage, searchKey, storage.length - 1 - searchKey);
-            size--;
-        } else {
-            System.out.println("resume is not exist");
-        }
-    }
-
-    public Resume[] getAll() {
-        return size == 0 ? null : Arrays.copyOfRange(storage, 0, size);
-    }
-
-    public int size() {
-        return size;
-    }
-
-    private int getSearchKey(String uuid) {
+    @Override
+    protected int getIndex(String uuid) {
         for (int i = 0; i < size; i++) {
             if (uuid.equals(storage[i].getUuid())) {
                 return i;
