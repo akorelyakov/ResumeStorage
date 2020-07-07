@@ -1,5 +1,7 @@
 import com.akorelyakov.webapp.model.Resume;
+import com.akorelyakov.webapp.storage.AbstractArrayStorage;
 import com.akorelyakov.webapp.storage.ArrayStorage;
+import com.akorelyakov.webapp.storage.SortedArrayStorage;
 
 /**
  * Test for your com.akorelyakov.webapp.storage.ArrayStorage implementation
