@@ -30,7 +30,7 @@ public class ListStorage extends AbstractStorage<Integer> {
 
     @Override
     protected Resume doGet(Integer  searchKey) {
-        return list.get((Integer) searchKey);
+        return list.get( searchKey);
     }
 
     @Override

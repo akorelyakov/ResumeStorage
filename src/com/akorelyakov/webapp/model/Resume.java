@@ -1,15 +1,15 @@
 package com.akorelyakov.webapp.model;
 
-import java.util.Objects;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * Initial resume class
  */
 public class Resume implements Comparable<Resume> {
     private final String uuid;
-
     private final String fullName;
+    private final Map<ContactType, String> contacts = new EnumMap<>(ContactType.class);
+    private final Map<SectionType, AbstractSection> sections = new EnumMap<>(SectionType.class);
 
     public Resume(String uuid, String fullName) {
         Objects.requireNonNull(uuid, "uuid must not be null)");
@@ -20,7 +20,7 @@ public class Resume implements Comparable<Resume> {
 
     public Resume(String fullName) {
         this(UUID.randomUUID().toString(), fullName);
-    }
+    };
 
     public String getUuid() {
         return uuid;
@@ -28,6 +28,14 @@ public class Resume implements Comparable<Resume> {
 
     public String getFullName() {
         return fullName;
+    }
+
+    public Map<ContactType, String> getContacts() {
+        return contacts;
+    }
+
+    public Map<SectionType, AbstractSection> getSections() {
+        return sections;
     }
 
     @Override
