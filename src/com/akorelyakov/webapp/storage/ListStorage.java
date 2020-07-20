@@ -18,23 +18,24 @@ public class ListStorage extends AbstractStorage<Integer> {
     public int size() {
         return list.size();
     }
+
     @Override
-    protected void doUpdate(Resume resume, Integer  searchKey) {
+    protected void doUpdate(Resume resume, Integer searchKey) {
         list.set(searchKey, resume);
     }
 
     @Override
-    protected void doSave(Resume resume, Integer  searchKey) {
+    protected void doSave(Resume resume, Integer searchKey) {
         list.add(resume);
     }
 
     @Override
-    protected Resume doGet(Integer  searchKey) {
-        return list.get( searchKey);
+    protected Resume doGet(Integer searchKey) {
+        return list.get(searchKey);
     }
 
     @Override
-    protected void doDelete(Integer  searchKey) {
+    protected void doDelete(Integer searchKey) {
         list.remove((searchKey).intValue());
     }
 
@@ -54,7 +55,7 @@ public class ListStorage extends AbstractStorage<Integer> {
     }
 
     @Override
-    protected boolean isExist(Integer  searchKey) {
+    protected boolean isExist(Integer searchKey) {
         return searchKey != null;
     }
 }
