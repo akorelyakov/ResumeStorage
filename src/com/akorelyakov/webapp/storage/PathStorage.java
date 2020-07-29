@@ -15,7 +15,6 @@ import java.util.stream.Stream;
 
 public class PathStorage extends AbstractStorage<Path> {
     private Path directory;
-
     private StreamSerializer streamSerializer;
 
     protected PathStorage(String dir, StreamSerializer streamSerializer) {
@@ -30,7 +29,6 @@ public class PathStorage extends AbstractStorage<Path> {
     @Override
     public void clear() {
         getFilesList().forEach(this::doDelete);
-
     }
 
     @Override
@@ -99,7 +97,7 @@ public class PathStorage extends AbstractStorage<Path> {
         try {
             return Files.list(directory);
         } catch (IOException e) {
-            throw new StorageException("Path read error", null, e);
+            throw new StorageException("Path read error", e);
         }
     }
 }
