@@ -1,15 +1,20 @@
 package com.akorelyakov.webapp.model;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import java.io.Serializable;
 import java.util.Objects;
 
 public class TextSection extends AbstractSection implements Serializable {
     private static final long serialVersionUID = 1L;
-    private final String content;
+    private String content;
 
     public TextSection(String content) {
         Objects.requireNonNull(content, "content must not be null");
         this.content = content;
+    }
+
+    public TextSection() {
     }
 
     public String getContent() {
