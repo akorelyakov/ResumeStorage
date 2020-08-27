@@ -1,5 +1,5 @@
 # ResumeStorage
-## Develop WebApp "com.akorelyakov.webapp.model.Resume Storage"
+## Develop WebApp "Resume Storage"
 ### Use: Java 8, IntelliJ IDEA, GitHib/Git, Servlet, JSP, JSTL, Tomcat, JUnit, PostgreSQL, GSON, JAXB
 ### Storage realization:
 * in memory based on an array, sorted array, list, and associated array (Map)в файловой системе (File API и Java 7 NIO File API)
